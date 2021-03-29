@@ -1,5 +1,5 @@
-import {useState, useContext, useEffect} from "react";
-import {postContext} from './store/PostContext';
+import React, {useState, useContext, useEffect} from "react";
+import {PostContext} from './store/PostContext';
 import './App.css';
 import {BrowserRouter as Router, Route, Switch, Link} from 'react-router-dom';
 import Home from "./app/Home";
@@ -8,8 +8,6 @@ import AddPost from "./app/AddPost";
 import logo from "./assets/images/logo.jpg";
 
 const App = () => {
-  const initialState = useContext(postContext);
-
     const [posts, setPosts] = useState([]);
     const [loading, setLoading] = useState(false);
 
@@ -25,8 +23,12 @@ const App = () => {
     }
 
     const postsArr = [];
+    Object.values(posts).forEach((post, key) => {
+        postsArr.push(post);
+    });
+
   return (
-      <postContext.Provider value={postsArr}>
+      <PostContext.Provider value={postsArr}>
           <Router>
             <div className="App">
                 <div className="container-fluid">
@@ -42,7 +44,7 @@ const App = () => {
                 </Switch>
             </div>
         </Router>
-    </postContext.Provider>
+    </PostContext.Provider>
   );
 }
 

@@ -1,12 +1,14 @@
-import {useState, useEffect} from 'react';
+import {useState, useEffect, useContext} from 'react';
+import {PostContext} from '../store/PostContext';
 import {Link, withRouter} from "react-router-dom";
 import logo from "../assets/images/logo.jpg";
 import Post from './Post';
 
 
 const Home = (props) => {
-console.log(props)
-    const [posts, setPosts] = useState([]);
+const postsArr = useContext(PostContext);
+console.log(postsArr)
+    /*const [posts, setPosts] = useState([]);
     const [loading, setLoading] = useState(false);
 
     useEffect(() => {
@@ -24,7 +26,7 @@ console.log(props)
     Object.values(posts).forEach((post, key) => {
         postsArr.push(post);
     });
-    console.log(postsArr)
+    console.log(postsArr)*/
     return(
         <div>
             <div className="container-fluid">

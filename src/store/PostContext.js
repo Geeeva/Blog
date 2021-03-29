@@ -1,6 +1,6 @@
 import React from "react";
 
-export const postContext = React.createContext({
+export const PostContext = React.createContext({
     posts: [
 
     ]
