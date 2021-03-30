@@ -23,8 +23,6 @@ const App = () => {
             .then(data => {setPosts(data); setLoading(false);});
     }
 
-
-
   return (
       <PostContext.Provider value={posts}>
           <Router>

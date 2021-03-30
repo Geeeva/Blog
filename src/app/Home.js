@@ -1,12 +1,20 @@
 import {useState, useEffect, useContext} from 'react';
 import {PostContext} from '../store/PostContext';
 import {Link, withRouter} from "react-router-dom";
-import logo from "../assets/images/logo.jpg";
-import Post from './Post';
 
 
 const Home = (props) => {
-    const posts = useContext(PostContext)
+    const deleteHandler = (postName) => {
+        const requestOptions = {
+            method: 'DELETE',
+            headers: {'Content-Type': 'application/json'}
+        };
+        fetch(`https://blog-d8b04-default-rtdb.europe-west1.firebasedatabase.app/posts/${postName}`, requestOptions)
+            .then(response => {response.json(); console.log(response)})
+            .then(data => console.log(data));
+    }
+    const posts = useContext(PostContext);
+    console.log(posts)
     const postsArr = [];
     Object.entries(posts).forEach(entry => {
         postsArr.push(entry);
@@ -22,13 +30,18 @@ const Home = (props) => {
                             {
                                 postsArr.map((post, key) => (
                                     <div className="col-md-4">
-                                <div className="icon-wrapper">
-                                    <Link to={{
-                                        pathname: `/edit-post`,
-                                        state: {
-                                        post, key}
+                                        <div class="col-md-12 icons">
+                                            <div className="icon-wrapper">
+                                                <Link to={{
+                                                    pathname: `/edit-post`,
+                                                    state: {
+                                                        post, key
+                                                    }
 
-                                    }}><i class="fas fa-edit"></i></Link></div>
+                                                }}>
+                                                    <i className="fas fa-edit"></i></Link></div>
+                                            <div className="icon-wrapper delete" onClick={deleteHandler(post[0])}><i className="fas fa-trash-alt"></i></div>
+                                        </div>
                                         <Link
                                             to={{
                                                 pathname: `/post/${key}`,

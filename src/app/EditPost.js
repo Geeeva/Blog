@@ -1,9 +1,6 @@
 import React, {useEffect} from 'react';
 import {useState} from 'react';
 
-const submitHandler = () => {
-
-}
 const EditPost = (props) => {
     const postName = props.location.state.post[0];
     const initialState ={
@@ -58,12 +55,11 @@ const EditPost = (props) => {
                     author: author,
                     description: description})
             };
-            fetch(`https://blog-d8b04-default-rtdb.europe-west1.firebasedatabase.app/posts/${postName}`, requestOptions)
+            fetch(`https://blog-d8b04-default-rtdb.europe-west1.firebasedatabase.app/posts/${postName}.json`, requestOptions)
                 .then(response => {response.json(); console.log(response)})
                 .then(data => console.log(data));
             setFormData(initialState);
         }
-
     }
 
     return(
