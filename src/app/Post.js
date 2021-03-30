@@ -1,11 +1,11 @@
 import { withRouter } from "react-router-dom";
 
-const Post = ({ location}) => {
+const Post = ({location}) => {
     const { state } = location;
-    const { pic, title, author, description } = state.post;
+    const { pic, title, author, description } = state.post[1];
     return (
         <div className="container">
-            <div>
+        <div>
                 <div className="pic-wrapper">
                 <img className="img-fluid" src={pic} alt={title} />
             </div>

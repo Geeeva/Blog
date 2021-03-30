@@ -6,27 +6,11 @@ import Post from './Post';
 
 
 const Home = (props) => {
-const postsArr = useContext(PostContext);
-console.log(postsArr)
-    /*const [posts, setPosts] = useState([]);
-    const [loading, setLoading] = useState(false);
-
-    useEffect(() => {
-        getResults();
-    },[]);
-
-    const getResults =() => {
-        setLoading(true);
-        fetch("https://blog-d8b04-default-rtdb.europe-west1.firebasedatabase.app/posts.json")
-            .then(response => response.json())
-            .then(data => {setPosts(data); setLoading(false);});
-    }
-
+    const posts = useContext(PostContext)
     const postsArr = [];
-    Object.values(posts).forEach((post, key) => {
-        postsArr.push(post);
+    Object.entries(posts).forEach(entry => {
+        postsArr.push(entry);
     });
-    console.log(postsArr)*/
     return(
         <div>
             <div className="container-fluid">
@@ -38,6 +22,13 @@ console.log(postsArr)
                             {
                                 postsArr.map((post, key) => (
                                     <div className="col-md-4">
+                                <div className="icon-wrapper">
+                                    <Link to={{
+                                        pathname: `/edit-post`,
+                                        state: {
+                                        post, key}
+
+                                    }}><i class="fas fa-edit"></i></Link></div>
                                         <Link
                                             to={{
                                                 pathname: `/post/${key}`,
@@ -47,9 +38,9 @@ console.log(postsArr)
                                             }}
                                         >
                                             <div className="pic-wrapper">
-                                                <img className="img-fluid" src={post.pic} alt={post.title}/>
+                                                <img className="img-fluid" src={post[1].pic} alt={post[1].title}/>
                                             </div>
-                                            <h4>{post.title}</h4>
+                                            <h4>{post[1].title}</h4>
                                         </Link>
                                     </div>
                                 ))

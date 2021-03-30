@@ -51,7 +51,8 @@ const AddPost = () => {
             const requestOptions = {
                 method: 'POST',
                 headers: {'Content-Type': 'application/json'},
-                body: JSON.stringify({        title: title,
+                body: JSON.stringify({
+                    title: title,
                     url: url,
                     author: author,
                     description: description})
@@ -60,17 +61,13 @@ const AddPost = () => {
                 .then(response => {response.json(); console.log(response)})
                 .then(data => console.log(data));
             setFormData(initialState);
-
-            /*axios.post('https://blog-d8b04-default-rtdb.europe-west1.firebasedatabase.app/posts.json', formData)
-                .then(response => console.log(response))*/
-
         }
 
         }
 
     return(
         <div>
-            <h2>Enter a new post</h2>
+            <h2>Add a new post</h2>
             <form>
                 <div>
                     <div className="col-md-6">

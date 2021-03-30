@@ -5,6 +5,7 @@ import {BrowserRouter as Router, Route, Switch, Link} from 'react-router-dom';
 import Home from "./app/Home";
 import Post from "./app/Post";
 import AddPost from "./app/AddPost";
+import EditPost from "./app/EditPost";
 import logo from "./assets/images/logo.jpg";
 
 const App = () => {
@@ -22,13 +23,10 @@ const App = () => {
             .then(data => {setPosts(data); setLoading(false);});
     }
 
-    const postsArr = [];
-    Object.values(posts).forEach((post, key) => {
-        postsArr.push(post);
-    });
+
 
   return (
-      <PostContext.Provider value={postsArr}>
+      <PostContext.Provider value={posts}>
           <Router>
             <div className="App">
                 <div className="container-fluid">
@@ -41,6 +39,7 @@ const App = () => {
                     <Route  path="/" exact strict component={Home} />
                     <Route  path="/post/:postId" exact strict component={Post} />
                     <Route  path="/add-post" exact strict component={AddPost} />
+                    <Route  path="/edit-post" exact strict component={EditPost} />
                 </Switch>
             </div>
         </Router>
