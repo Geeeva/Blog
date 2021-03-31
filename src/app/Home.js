@@ -5,29 +5,29 @@ import {Link, withRouter} from "react-router-dom";
 
 const Home = (props) => {
     const deleteHandler = (postName) => {
+        console.log(postName)
         const requestOptions = {
             method: 'DELETE',
             headers: {'Content-Type': 'application/json'}
         };
-        fetch(`https://blog-d8b04-default-rtdb.europe-west1.firebasedatabase.app/posts/${postName}`, requestOptions)
-            .then(response => {response.json(); console.log(response)})
+        fetch(`https://blog-d8b04-default-rtdb.europe-west1.firebasedatabase.app/posts/${postName}.json`, requestOptions)
+            .then(response => {response.json();})
             .then(data => console.log(data));
     }
     const posts = useContext(PostContext);
-    console.log(posts)
     const postsArr = [];
-    Object.entries(posts).forEach(entry => {
+    if(posts) {Object.entries(posts).forEach(entry => {
         postsArr.push(entry);
-    });
+    })};
     return(
-        <div>
+        <>
             <div className="container-fluid">
                 <div className="row">
                     <div className="posts-container col-md-12">
                         <h2>All posts</h2>
-
                         <div className="row">
-                            {
+                            {postsArr.length === 0 && <div>No posts to show</div>}
+                            {postsArr.length > 0 &&
                                 postsArr.map((post, key) => (
                                     <div className="col-md-4">
                                         <div class="col-md-12 icons">
@@ -40,7 +40,7 @@ const Home = (props) => {
 
                                                 }}>
                                                     <i className="fas fa-edit"></i></Link></div>
-                                            <div className="icon-wrapper delete" onClick={deleteHandler(post[0])}><i className="fas fa-trash-alt"></i></div>
+                                            <div className="icon-wrapper delete" onClick={() => deleteHandler(post[0])}><i className="fas fa-trash-alt"></i></div>
                                         </div>
                                         <Link
                                             to={{
@@ -62,7 +62,7 @@ const Home = (props) => {
                     </div>
                 </div>
             </div>
-        </div>
+        </>
     )
 }
 
